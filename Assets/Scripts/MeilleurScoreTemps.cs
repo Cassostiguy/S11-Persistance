@@ -14,19 +14,26 @@ public class MeilleurScoreTemps : MonoBehaviour
     private void Start()
     {
         _jeu = GetComponent<MiniJeu>();
+        //va regarder les meme composante qui a dans d'audre script
 
         meilleurScore = PlayerPrefs.GetFloat("meilleurScore", 0f);
-        textMeilleurScore.text = "Meilleur score : " + meilleurScore.ToString("00.00");
+        //0f est la valeur de default
+      
+       string nom = PlayerPrefs.GetString("nom","");
+        textMeilleurScore.text = "Meilleur score de " + nom +" "+ meilleurScore.ToString("00.00");
     }
 
     private void Update()
     {
         if(_jeu.pointageTemps > meilleurScore)
+            //si le pointage actuel est plus eleve que le meilleur score
         {
             meilleurScore = _jeu.pointageTemps;
 
             PlayerPrefs.SetFloat("meilleurScore", meilleurScore);
-            textMeilleurScore.text = "Meilleur score "+DateTime.Now.ToString("g")+" : " + meilleurScore.ToString("00.00");
+            //remplace la valeur de meilleur score
+            textMeilleurScore.text = "Meilleur score "+" : " + meilleurScore.ToString("00.00");
+            //DateTime.Now.ToString("g") pas obligé montre le temps ou on a eu le meilleur score
         }
     }
 }
